@@ -18,6 +18,18 @@ var keydown = player.keydown;
 var keyup = player.keyup;
 window.Script1 = function()
 {
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'scenario_start',
+    payload: { timestamp: new Date().toISOString() }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script2 = function()
+{
   window.STREAMLOOP_XAPI = window.STREAMLOOP_XAPI || {
 endpoint: "https://stephanie-sandbox.lrs.io/xapi/statements",
 authHeader: "Basic MGRjNzRmNGQtNjg4OS00YjNhLWJmMGQtZDI4YzZkYjU4NzQwOmRlZDA2YjQ1LWEyNDgtNGZkMi1hYTdmLTM5MmQ5YWE4MDg4NQ==",
@@ -55,7 +67,7 @@ window.sendStreamLoopStatement = function (objectId, verbId, verbDisplay, scoreR
 };
 }
 
-window.Script2 = function()
+window.Script3 = function()
 {
   window.sendStreamLoopStatement(
   "Path_A_Defensive_Script",
@@ -69,7 +81,38 @@ window.Script2 = function()
 );
 }
 
-window.Script3 = function()
+window.Script4 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_A_Defensive_Script',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script5 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_1',
+    payload: {
+      choice: player.GetVar('PathChosen'),
+      score: player.GetVar('EmpathyScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script6 = function()
 {
   window.sendStreamLoopStatement(
   "Path_B_Discount_BandAid",
@@ -83,7 +126,38 @@ window.Script3 = function()
 );
 }
 
-window.Script4 = function()
+window.Script7 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_B_Discount_BandAid',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script8 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_1',
+    payload: {
+      choice: player.GetVar('PathChosen'),
+      score: player.GetVar('EmpathyScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script9 = function()
 {
   window.sendStreamLoopStatement(
   "Path_C_PAN_Response",
@@ -97,19 +171,50 @@ window.Script4 = function()
 );
 }
 
-window.Script5 = function()
+window.Script10 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_C_PAN_Response',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script11 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_1',
+    payload: {
+      choice: player.GetVar('PathChosen'),
+      score: player.GetVar('EmpathyScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script12 = function()
 {
   var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
 player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
-window.Script6 = function()
+window.Script13 = function()
 {
   var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
 player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
-window.Script7 = function()
+window.Script14 = function()
 {
   window.sendStreamLoopStatement(
   "Path_C_RootCause_Technical",
@@ -123,7 +228,38 @@ window.Script7 = function()
 );
 }
 
-window.Script8 = function()
+window.Script15 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_C_RootCause_Technical',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script16 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_2',
+    payload: {
+      choice: player.GetVar('RootCausePath'),
+      score: player.GetVar('RootCauseScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script17 = function()
 {
   window.sendStreamLoopStatement(
   "Path_C_RootCause_Price",
@@ -137,7 +273,38 @@ window.Script8 = function()
 );
 }
 
-window.Script9 = function()
+window.Script18 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_C_RootCause_Price',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script19 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_2',
+    payload: {
+      choice: player.GetVar('RootCausePath'),
+      score: player.GetVar('RootCauseScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script20 = function()
 {
   window.sendStreamLoopStatement(
   "Path_C_RootCause_Competitor",
@@ -151,25 +318,56 @@ window.Script9 = function()
 );
 }
 
-window.Script10 = function()
+window.Script21 = function()
+{
+  (function () {
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'xapi_statement_sent',
+    payload: {
+      verb: 'selected',
+      activity: 'Path_C_RootCause_Competitor',
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script22 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_2',
+    payload: {
+      choice: player.GetVar('RootCausePath'),
+      score: player.GetVar('RootCauseScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script23 = function()
 {
   var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
 player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
-window.Script11 = function()
+window.Script24 = function()
 {
   var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
 player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
-window.Script12 = function()
+window.Script25 = function()
 {
   var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
 player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
-window.Script13 = function()
+window.Script26 = function()
 {
   var learnerName = player.GetVar("LearnerName") || "Anonymous Learner";
 var learnerEmail = player.GetVar("LearnerEmail") || "rep@streamloop.com";
@@ -223,6 +421,24 @@ fetch(window.STREAMLOOP_XAPI.endpoint, {
 }).catch(function (err) { console.error("xAPI completion send failed:", err); });
 
 window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "*");
+}
+
+window.Script27 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'scenario_complete',
+    payload: {
+      pathChosen: player.GetVar('PathChosen'),
+      rootCausePath: player.GetVar('RootCausePath'),
+      empathyScore: player.GetVar('EmpathyScore'),
+      rootCauseScore: player.GetVar('RootCauseScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
 }
 
 };
