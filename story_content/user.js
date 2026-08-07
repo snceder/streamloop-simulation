@@ -24,7 +24,7 @@ window.Script1 = function()
     source: 'streamloop-simulation',
     type: 'scenario_start',
     payload: { timestamp: new Date().toISOString() }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -63,7 +63,7 @@ window.sendStreamLoopStatement = function (objectId, verbId, verbDisplay, scoreR
     body: JSON.stringify(statement)
   }).catch(function (err) { console.error("xAPI send failed:", err); });
 
-  window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "https://stephaniecedergren.com");
+  window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "https://www.stephaniecedergren.com");
 };
 }
 
@@ -93,7 +93,7 @@ window.Script4 = function()
       score: player.GetVar('EmpathyScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -123,7 +123,7 @@ window.Script6 = function()
       score: player.GetVar('EmpathyScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -153,7 +153,7 @@ window.Script8 = function()
       score: player.GetVar('EmpathyScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -195,7 +195,7 @@ window.Script12 = function()
       score: player.GetVar('RootCauseScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -225,7 +225,7 @@ window.Script14 = function()
       score: player.GetVar('RootCauseScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -255,7 +255,7 @@ window.Script16 = function()
       score: player.GetVar('RootCauseScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
@@ -347,7 +347,7 @@ window.Script21 = function()
       rootCauseScore: player.GetVar('RootCauseScore'),
       timestamp: new Date().toISOString()
     }
-  }, 'https://stephaniecedergren.com');
+  }, 'https://www.stephaniecedergren.com');
 })();
 }
 
