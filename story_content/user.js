@@ -32,7 +32,7 @@ window.Script2 = function()
 {
   window.STREAMLOOP_XAPI = window.STREAMLOOP_XAPI || {
 endpoint: "https://stephanie-sandbox.lrs.io/xapi/statements",
-authHeader: "Basic MGRjNzRmNGQtNjg4OS00YjNhLWJmMGQtZDI4YzZkYjU4NzQwOmRlZDA2YjQ1LWEyNDgtNGZkMi1hYTdmLTM5MmQ5YWE4MDg4NQ==",
+authHeader: "Basic NjU2MmFjZDktYTM3Yi00YmE4LWE0NzEtZTI3OTcxMDU1NGM2Ojg3OGUzMjgxLTk0NDEtNDc0My1hMGIyLTI2MzMzNjhjYjIyZQ==",
   namespace: "https://stephaniecedergren.com/xapi/streamloop-simulation/"
 };
 
@@ -63,7 +63,7 @@ window.sendStreamLoopStatement = function (objectId, verbId, verbDisplay, scoreR
     body: JSON.stringify(statement)
   }).catch(function (err) { console.error("xAPI send failed:", err); });
 
-  window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "*");
+  window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "https://stephaniecedergren.com");
 };
 }
 
@@ -84,12 +84,13 @@ window.Script3 = function()
 window.Script4 = function()
 {
   (function () {
+  var player = GetPlayer();
   window.parent.postMessage({
     source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
+    type: 'decision_1',
     payload: {
-      verb: 'selected',
-      activity: 'Path_A_Defensive_Script',
+      choice: player.GetVar('PathChosen'),
+      score: player.GetVar('EmpathyScore'),
       timestamp: new Date().toISOString()
     }
   }, 'https://stephaniecedergren.com');
@@ -97,6 +98,20 @@ window.Script4 = function()
 }
 
 window.Script5 = function()
+{
+  window.sendStreamLoopStatement(
+  "Path_B_Discount_BandAid",
+  "https://stephaniecedergren.com/xapi/verbs/selected",
+  "selected",
+  50,
+  {
+    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
+    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Transactional Discount"
+  }
+);
+}
+
+window.Script6 = function()
 {
   (function () {
   var player = GetPlayer();
@@ -112,33 +127,18 @@ window.Script5 = function()
 })();
 }
 
-window.Script6 = function()
-{
-  window.sendStreamLoopStatement(
-  "Path_B_Discount_BandAid",
-  "https://stephaniecedergren.com/xapi/verbs/selected",
-  "selected",
-  50,
-  {
-    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
-    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Transactional Discount"
-  }
-);
-}
-
 window.Script7 = function()
 {
-  (function () {
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
-    payload: {
-      verb: 'selected',
-      activity: 'Path_B_Discount_BandAid',
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
+  window.sendStreamLoopStatement(
+  "Path_C_PAN_Response",
+  "https://stephaniecedergren.com/xapi/verbs/selected",
+  "selected",
+  100,
+  {
+    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
+    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "P.A.N. Active Listening"
+  }
+);
 }
 
 window.Script8 = function()
@@ -159,62 +159,17 @@ window.Script8 = function()
 
 window.Script9 = function()
 {
-  window.sendStreamLoopStatement(
-  "Path_C_PAN_Response",
-  "https://stephaniecedergren.com/xapi/verbs/selected",
-  "selected",
-  100,
-  {
-    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
-    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "P.A.N. Active Listening"
-  }
-);
+  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
+player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
 window.Script10 = function()
 {
-  (function () {
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
-    payload: {
-      verb: 'selected',
-      activity: 'Path_C_PAN_Response',
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
+  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
+player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
 window.Script11 = function()
-{
-  (function () {
-  var player = GetPlayer();
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'decision_1',
-    payload: {
-      choice: player.GetVar('PathChosen'),
-      score: player.GetVar('EmpathyScore'),
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
-}
-
-window.Script12 = function()
-{
-  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
-player.SetVar("ScenarioTimeSeconds", elapsed);
-}
-
-window.Script13 = function()
-{
-  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
-player.SetVar("ScenarioTimeSeconds", elapsed);
-}
-
-window.Script14 = function()
 {
   window.sendStreamLoopStatement(
   "Path_C_RootCause_Technical",
@@ -228,19 +183,64 @@ window.Script14 = function()
 );
 }
 
-window.Script15 = function()
+window.Script12 = function()
 {
   (function () {
+  var player = GetPlayer();
   window.parent.postMessage({
     source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
+    type: 'decision_2',
     payload: {
-      verb: 'selected',
-      activity: 'Path_C_RootCause_Technical',
+      choice: player.GetVar('RootCausePath'),
+      score: player.GetVar('RootCauseScore'),
       timestamp: new Date().toISOString()
     }
   }, 'https://stephaniecedergren.com');
 })();
+}
+
+window.Script13 = function()
+{
+  window.sendStreamLoopStatement(
+  "Path_C_RootCause_Price",
+  "https://stephaniecedergren.com/xapi/verbs/selected",
+  "selected",
+  50,
+  {
+    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
+    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Root Cause Fix: Price Discount"
+  }
+);
+}
+
+window.Script14 = function()
+{
+  (function () {
+  var player = GetPlayer();
+  window.parent.postMessage({
+    source: 'streamloop-simulation',
+    type: 'decision_2',
+    payload: {
+      choice: player.GetVar('RootCausePath'),
+      score: player.GetVar('RootCauseScore'),
+      timestamp: new Date().toISOString()
+    }
+  }, 'https://stephaniecedergren.com');
+})();
+}
+
+window.Script15 = function()
+{
+  window.sendStreamLoopStatement(
+  "Path_C_RootCause_Competitor",
+  "https://stephaniecedergren.com/xapi/verbs/selected",
+  "selected",
+  0,
+  {
+    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
+    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Root Cause Fix: Competitor Perk"
+  }
+);
 }
 
 window.Script16 = function()
@@ -261,113 +261,23 @@ window.Script16 = function()
 
 window.Script17 = function()
 {
-  window.sendStreamLoopStatement(
-  "Path_C_RootCause_Price",
-  "https://stephaniecedergren.com/xapi/verbs/selected",
-  "selected",
-  50,
-  {
-    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
-    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Root Cause Fix: Price Discount"
-  }
-);
+  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
+player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
 window.Script18 = function()
 {
-  (function () {
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
-    payload: {
-      verb: 'selected',
-      activity: 'Path_C_RootCause_Price',
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
+  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
+player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
 window.Script19 = function()
 {
-  (function () {
-  var player = GetPlayer();
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'decision_2',
-    payload: {
-      choice: player.GetVar('RootCausePath'),
-      score: player.GetVar('RootCauseScore'),
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
+  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
+player.SetVar("ScenarioTimeSeconds", elapsed);
 }
 
 window.Script20 = function()
-{
-  window.sendStreamLoopStatement(
-  "Path_C_RootCause_Competitor",
-  "https://stephaniecedergren.com/xapi/verbs/selected",
-  "selected",
-  0,
-  {
-    "https://stephaniecedergren.com/xapi/extensions/call-driver": "price-and-technical",
-    "https://stephaniecedergren.com/xapi/extensions/behavior-type": "Root Cause Fix: Competitor Perk"
-  }
-);
-}
-
-window.Script21 = function()
-{
-  (function () {
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'xapi_statement_sent',
-    payload: {
-      verb: 'selected',
-      activity: 'Path_C_RootCause_Competitor',
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
-}
-
-window.Script22 = function()
-{
-  (function () {
-  var player = GetPlayer();
-  window.parent.postMessage({
-    source: 'streamloop-simulation',
-    type: 'decision_2',
-    payload: {
-      choice: player.GetVar('RootCausePath'),
-      score: player.GetVar('RootCauseScore'),
-      timestamp: new Date().toISOString()
-    }
-  }, 'https://stephaniecedergren.com');
-})();
-}
-
-window.Script23 = function()
-{
-  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
-player.SetVar("ScenarioTimeSeconds", elapsed);
-}
-
-window.Script24 = function()
-{
-  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
-player.SetVar("ScenarioTimeSeconds", elapsed);
-}
-
-window.Script25 = function()
-{
-  var elapsed = Math.round((Date.now() - window.STREAMLOOP_XAPI.scenarioStart) / 1000);
-player.SetVar("ScenarioTimeSeconds", elapsed);
-}
-
-window.Script26 = function()
 {
   var learnerName = player.GetVar("LearnerName") || "Anonymous Learner";
 var learnerEmail = player.GetVar("LearnerEmail") || "rep@streamloop.com";
@@ -423,7 +333,7 @@ fetch(window.STREAMLOOP_XAPI.endpoint, {
 window.parent.postMessage({ type: "streamloop-xapi-statement", statement: statement }, "*");
 }
 
-window.Script27 = function()
+window.Script21 = function()
 {
   (function () {
   var player = GetPlayer();

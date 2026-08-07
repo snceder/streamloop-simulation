@@ -2,86 +2,68 @@ function ExecuteScript(strId)
 {
   switch (strId)
   {
-      case "5VWr6K1u1E6":
+      case "68V9wBLSCpi":
         Script1();
         break;
-      case "64MN54ffIPt":
+      case "5gaQFu1CsyQ":
         Script2();
         break;
-      case "5YLBJpmFxWC":
+      case "6BtZTvTGdFU":
         Script3();
         break;
-      case "6nZNNdBEqD5":
+      case "5mJyMpw7RWP":
         Script4();
         break;
-      case "5s2hHTdjtWx":
+      case "64kyWUkFN44":
         Script5();
         break;
-      case "5scsZCJbVQF":
+      case "668t5qxhQ1p":
         Script6();
         break;
-      case "6lFfYxPdvAb":
+      case "6rRArL6bEsc":
         Script7();
         break;
-      case "6VorCG14qLG":
+      case "5xHmyI6hVrd":
         Script8();
         break;
-      case "5jmui9PruJY":
+      case "5aBzb7IDN0X":
         Script9();
         break;
-      case "69PrvCBcq50":
+      case "6fKBHFSomS8":
         Script10();
         break;
-      case "5jnBSCwhEWP":
+      case "6WDVM6HunuS":
         Script11();
         break;
-      case "6j2L6moqWbP":
+      case "5fGnomODR50":
         Script12();
         break;
-      case "6e7nWMZ2gEK":
+      case "6PiuGysFmfS":
         Script13();
         break;
-      case "5j2ZIYwbzzT":
+      case "67vXdY1B5mV":
         Script14();
         break;
-      case "5tDgFyRX6nV":
+      case "6FDaFawzegE":
         Script15();
         break;
-      case "6HHEYfbMoW0":
+      case "6UgWp2EtXwY":
         Script16();
         break;
-      case "6OB0eR78qCX":
+      case "6CTx2S2SPwG":
         Script17();
         break;
-      case "6T6uiple5d3":
+      case "6f4mAaIQQab":
         Script18();
         break;
-      case "5VA0DnFOXkf":
+      case "65RBcbQHnHr":
         Script19();
         break;
-      case "6gG5nBCNYJf":
+      case "5zro4IKuOGz":
         Script20();
         break;
-      case "60j9nRQQdLl":
+      case "5dhDTGwFmAR":
         Script21();
-        break;
-      case "5y3FgfEzFF3":
-        Script22();
-        break;
-      case "667P2leUk47":
-        Script23();
-        break;
-      case "6RZd0VbM53C":
-        Script24();
-        break;
-      case "6XSzayJi3sV":
-        Script25();
-        break;
-      case "5cGKEIpyVUU":
-        Script26();
-        break;
-      case "6GhDS7zgrQz":
-        Script27();
         break;
   }
 }
